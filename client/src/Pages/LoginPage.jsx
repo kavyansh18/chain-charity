@@ -5,10 +5,11 @@ import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 
 function LoginPage() {
+
   console.log("LoginPage component rendered");
   const navigate = useNavigate();
   const { authenticate } = useOkto();
-  const [authToken, setAuthToken] = useState(null);
+  const [authToken, setAuthToken] = useState();
   const BASE_URL = "https://sandbox-api.okto.tech";
   const OKTO_CLIENT_API = "3469fac8-410e-4fab-8f16-a0345461045c";
 
@@ -40,19 +41,11 @@ function LoginPage() {
 
   const handleGoogleLogin = async (credentialResponse) => {
     console.log("Google login response:", credentialResponse);
-    
-    // Check if the credentialResponse contains the 'credential' property
-    if (!credentialResponse.credential) {
-      console.error("No credential found in the response");
-      return;
-    }
-
     const idToken = credentialResponse.credential;
-    console.log("Google ID Token: ", idToken);
-
+    console.log("google idtoken: ", idToken);
     authenticate(idToken, async (authResponse, error) => {
       if (authResponse) {
-        console.log("Authentication response: ", authResponse);
+        console.log("Authentication check: ", authResponse);
         setAuthToken(authResponse.auth_token);
         if (!authToken && authResponse.action === "signup") {
           console.log("User Signup");
@@ -64,9 +57,10 @@ function LoginPage() {
             }
           });
         }
-        console.log("Auth token received: ", authToken);
+        console.log("auth token received", authToken);
         navigate("/home");
-      } else if (error) {
+      }
+      if (error) {
         console.error("Authentication error:", error);
       }
     });
