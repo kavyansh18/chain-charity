@@ -13,8 +13,9 @@ function App() {
     <Router>
       <OktoProvider apiKey={OKTO_CLIENT_API_KEY} buildType={BuildType.SANDBOX}>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={<Explore />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/explore" element={<Explore />} />
         </Routes>
       </OktoProvider>

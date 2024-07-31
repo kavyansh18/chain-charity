@@ -6,9 +6,10 @@ import img3 from '../assets/img3.png';
 import img4 from '../assets/img4.png';
 import img5 from '../assets/img5.png';
 import img6 from '../assets/img6.png';
+import hunger from '../assets/hunger.png';
 import Navbaar from '../Components/Navbaar';
 
-const CarouselItem = ({ imgSrc, title, topic, introduceDes, detailTitle, detailDes, showDetail }) => (
+const CarouselItem = ({ imgSrc, title, topic, introduceDes, detailTitle, detailDes, showDetail, specifications }) => (
   <div className="item">
     <img src={imgSrc} alt={topic} />
     <div className="introduce">
@@ -19,32 +20,28 @@ const CarouselItem = ({ imgSrc, title, topic, introduceDes, detailTitle, detailD
     </div>
     <div className="detail">
       <div className="title">{detailTitle}</div>
-      <div className="des">{detailDes}</div>
+      <div className="ddes">{detailDes}</div>
       <div className="specifications">
         <div>
-          <p>Used Time</p>
-          <p>6 hours</p>
+          <p>Across</p>
+          <p>{specifications.Across}</p>
         </div>
         <div>
-          <p>Charging port</p>
-          <p>Type-C</p>
+          <p>Donations Raised</p>
+          <p>{specifications.dn}</p>
         </div>
         <div>
-          <p>Compatible</p>
-          <p>Android</p>
+          <p>Helped</p>
+          <p>{specifications.helped}</p>
         </div>
         <div>
           <p>Bluetooth</p>
-          <p>5.3</p>
-        </div>
-        <div>
-          <p>Controlled</p>
-          <p>Touch</p>
+          <p>{specifications.since}</p>
         </div>
       </div>
       <div className="checkout">
-        <button>ADD TO CART</button>
-        <button>CHECKOUT</button>
+        <button>FEEDBACK</button>
+        <button>DONATE</button>
       </div>
     </div>
   </div>
@@ -52,12 +49,12 @@ const CarouselItem = ({ imgSrc, title, topic, introduceDes, detailTitle, detailD
 
 const Explore = () => {
   const [items, setItems] = useState([
-    { img: img1, title: "DESIGN SLIDER", topic: "Airpod", introduce: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laborum cumque dignissimos quidem atque et eligendi aperiam voluptates beatae maxime.", detail: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, reiciendis suscipit nobis nulla animi, modi explicabo quod corrupti impedit illo, accusantium in eaque nam quia adipisci aut distinctio porro eligendi. Reprehenderit nostrum consequuntur ea! Accusamus architecto dolores modi ducimus facilis quas voluptatibus! Tempora ratione accusantium magnam nulla tenetur autem beatae.", specifications: { usedTime: "6 hours", chargingPort: "Type-C", compatible: "Android", bluetooth: "5.3", controlled: "Touch" } },
-    { img: img2, title: "DESIGN SLIDER", topic: "Airpod", introduce: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laborum cumque dignissimos quidem atque et eligendi aperiam voluptates beatae maxime.", detail: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, reiciendis suscipit nobis nulla animi, modi explicabo quod corrupti impedit illo, accusantium in eaque nam quia adipisci aut distinctio porro eligendi. Reprehenderit nostrum consequuntur ea! Accusamus architecto dolores modi ducimus facilis quas voluptatibus! Tempora ratione accusantium magnam nulla tenetur autem beatae.", specifications: { usedTime: "6 hours", chargingPort: "Type-C", compatible: "Android", bluetooth: "5.3", controlled: "Touch" } },
-    { img: img3, title: "DESIGN SLIDER", topic: "Airpod", introduce: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laborum cumque dignissimos quidem atque et eligendi aperiam voluptates beatae maxime.", detail: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, reiciendis suscipit nobis nulla animi, modi explicabo quod corrupti impedit illo, accusantium in eaque nam quia adipisci aut distinctio porro eligendi. Reprehenderit nostrum consequuntur ea! Accusamus architecto dolores modi ducimus facilis quas voluptatibus! Tempora ratione accusantium magnam nulla tenetur autem beatae.", specifications: { usedTime: "6 hours", chargingPort: "Type-C", compatible: "Android", bluetooth: "5.3", controlled: "Touch" } },
-    { img: img4, title: "DESIGN SLIDER", topic: "Airpod", introduce: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laborum cumque dignissimos quidem atque et eligendi aperiam voluptates beatae maxime.", detail: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, reiciendis suscipit nobis nulla animi, modi explicabo quod corrupti impedit illo, accusantium in eaque nam quia adipisci aut distinctio porro eligendi. Reprehenderit nostrum consequuntur ea! Accusamus architecto dolores modi ducimus facilis quas voluptatibus! Tempora ratione accusantium magnam nulla tenetur autem beatae.", specifications: { usedTime: "6 hours", chargingPort: "Type-C", compatible: "Android", bluetooth: "5.3", controlled: "Touch" } },
-    { img: img5, title: "DESIGN SLIDER", topic: "Airpod", introduce: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laborum cumque dignissimos quidem atque et eligendi aperiam voluptates beatae maxime.", detail: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, reiciendis suscipit nobis nulla animi, modi explicabo quod corrupti impedit illo, accusantium in eaque nam quia adipisci aut distinctio porro eligendi. Reprehenderit nostrum consequuntur ea! Accusamus architecto dolores modi ducimus facilis quas voluptatibus! Tempora ratione accusantium magnam nulla tenetur autem beatae.", specifications: { usedTime: "6 hours", chargingPort: "Type-C", compatible: "Android", bluetooth: "5.3", controlled: "Touch" } },
-    { img: img6, title: "DESIGN SLIDER", topic: "Airpod", introduce: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laborum cumque dignissimos quidem atque et eligendi aperiam voluptates beatae maxime.", detail: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, reiciendis suscipit nobis nulla animi, modi explicabo quod corrupti impedit illo, accusantium in eaque nam quia adipisci aut distinctio porro eligendi. Reprehenderit nostrum consequuntur ea! Accusamus architecto dolores modi ducimus facilis quas voluptatibus! Tempora ratione accusantium magnam nulla tenetur autem beatae.", specifications: { usedTime: "6 hours", chargingPort: "Type-C", compatible: "Android", bluetooth: "5.3", controlled: "Touch" } }
+    { img: hunger, title: "Life-Lab", topic: "Let's make science fun and experiential!", introduce: "Life-Lab has been active in India for over 5 years, conducting pedagogical experiments focused on fun, engagement, conceptual understanding, creativity, innovation, and problem-solving. Our strategy aims to provide science education for all through a threefold approach.", detail: "When scientific illiteracy prevails, it deepens inequity and limits informed decision-making. Science education is crucial for personal growth. Life-Lab has been advancing science education in India for over 5 years with engaging and innovative methods, focusing on fun, creativity, and problem-solving.", specifications: { Across: "11 States", dn: "10 Lakhs", helped: "65000 children", since: "2000"} },
+    { img: img2, title: "DESIGN SLIDER", topic: "Airpod", introduce: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laborum cumque dignissimos quidem atque et eligendi aperiam voluptates beatae maxime.", detail: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, reiciendis suscipit nobis nulla animi, modi explicabo quod corrupti impedit illo, accusantium in eaque nam quia adipisci aut distinctio porro eligendi. Reprehenderit nostrum consequuntur ea! Accusamus architecto dolores modi ducimus facilis quas voluptatibus! Tempora ratione accusantium magnam nulla tenetur autem beatae.", specifications: { Across: "6 hours", dn: "Type-C", helped: "Android", since: "5.3" } },
+    { img: img3, title: "DESIGN SLIDER", topic: "Airpod", introduce: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laborum cumque dignissimos quidem atque et eligendi aperiam voluptates beatae maxime.", detail: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, reiciendis suscipit nobis nulla animi, modi explicabo quod corrupti impedit illo, accusantium in eaque nam quia adipisci aut distinctio porro eligendi. Reprehenderit nostrum consequuntur ea! Accusamus architecto dolores modi ducimus facilis quas voluptatibus! Tempora ratione accusantium magnam nulla tenetur autem beatae.", specifications: { Across: "6 hours", dn: "Type-C", helped: "Android", since: "5.3" } },
+    { img: img4, title: "DESIGN SLIDER", topic: "Airpod", introduce: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laborum cumque dignissimos quidem atque et eligendi aperiam voluptates beatae maxime.", detail: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, reiciendis suscipit nobis nulla animi, modi explicabo quod corrupti impedit illo, accusantium in eaque nam quia adipisci aut distinctio porro eligendi. Reprehenderit nostrum consequuntur ea! Accusamus architecto dolores modi ducimus facilis quas voluptatibus! Tempora ratione accusantium magnam nulla tenetur autem beatae.", specifications: { Across: "6 hours", dn: "Type-C", helped: "Android", since: "5.3" } },
+    { img: img5, title: "DESIGN SLIDER", topic: "Airpod", introduce: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laborum cumque dignissimos quidem atque et eligendi aperiam voluptates beatae maxime.", detail: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, reiciendis suscipit nobis nulla animi, modi explicabo quod corrupti impedit illo, accusantium in eaque nam quia adipisci aut distinctio porro eligendi. Reprehenderit nostrum consequuntur ea! Accusamus architecto dolores modi ducimus facilis quas voluptatibus! Tempora ratione accusantium magnam nulla tenetur autem beatae.", specifications: { Across: "6 hours", dn: "Type-C", helped: "Android", since: "5.3"} },
+    { img: img6, title: "DESIGN SLIDER", topic: "Airpod", introduce: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laborum cumque dignissimos quidem atque et eligendi aperiam voluptates beatae maxime.", detail: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, reiciendis suscipit nobis nulla animi, modi explicabo quod corrupti impedit illo, accusantium in eaque nam quia adipisci aut distinctio porro eligendi. Reprehenderit nostrum consequuntur ea! Accusamus architecto dolores modi ducimus facilis quas voluptatibus! Tempora ratione accusantium magnam nulla tenetur autem beatae.", specifications: { Across: "6 hours", dn: "Type-C", helped: "Android", since: "5.3"} }
   ]);
 
   const [disableButtons, setDisableButtons] = useState(false);
@@ -96,32 +93,31 @@ const Explore = () => {
 
   return (
     <div>
-      <div>
       <Navbaar />
-      </div>
-    <div>
-      <div className={`carousel ${showDetail ? 'showDetail' : ''}`} ref={carouselRef}>
-        <div className="list">
-          {items.map((item, index) => (
-            <CarouselItem
-              key={index}
-              imgSrc={item.img}
-              title={item.title}
-              topic={item.topic}
-              introduceDes={item.introduce}
-              detailTitle={item.topic}
-              detailDes={item.detail}
-              showDetail={() => setShowDetail(true)}
-            />
-          ))}
+      <div>
+        <div className={`carousel ${showDetail ? 'showDetail' : ''}`} ref={carouselRef}>
+          <div className="list">
+            {items.map((item, index) => (
+              <CarouselItem
+                key={index}
+                imgSrc={item.img}
+                title={item.title}
+                topic={item.topic}
+                introduceDes={item.introduce}
+                detailTitle={item.topic}
+                detailDes={item.detail}
+                showDetail={() => setShowDetail(true)}
+                specifications={item.specifications} // Pass specifications to CarouselItem
+              />
+            ))}
+          </div>
+          <div className="arrows">
+            <button id="prev">&lt;</button>
+            <button id="next">&gt;</button>
+            <button id="back">See All &#8599;</button>
+          </div>
         </div>
-        <div className="arrows">
-          <button id="prev">&lt;</button>
-          <button id="next">&gt;</button>
-          <button id="back">See All &#8599;</button>
-        </div>
       </div>
-    </div>
     </div>
   );
 };
