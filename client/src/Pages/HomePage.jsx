@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useOkto } from "okto-sdk-react";
-function HomePage() {
-  console.log("homepage rendered")
+
+const HomePage = () => {
+  console.log("homepage rendered");
+
   const [userDetails, setUserDetails] = useState(null);
   const [portfolioData, setPortfolioData] = useState(null);
   const [wallets, setWallets] = useState(null);
@@ -10,12 +12,14 @@ function HomePage() {
   const [error, setError] = useState(null);
   const [activeSection, setActiveSection] = useState(null);
   const { getUserDetails, getPortfolio, createWallet, transferTokens, orderHistory } = useOkto();
+
   const [transferData, setTransferData] = useState({
     network_name: "",
     token_address: "",
     quantity: "",
     recipient_address: "",
   });
+
   const [orderData, setOrderData] = useState({
     order_id: "",
   });
@@ -29,6 +33,7 @@ function HomePage() {
       setError(`Failed to fetch user details: ${error.message}`);
     }
   };
+
   const fetchPortfolio = async () => {
     try {
       const portfolio = await getPortfolio();
@@ -38,10 +43,11 @@ function HomePage() {
       setError(`Failed to fetch portfolio: ${error.message}`);
     }
   };
+
   const fetchWallets = async () => {
     try {
       const walletsData = await createWallet();
-      console.log(walletsData)
+      console.log(walletsData);
       setWallets(walletsData);
       setActiveSection('wallets');
     } catch (error) {
@@ -87,12 +93,14 @@ function HomePage() {
     maxWidth: '800px',
     margin: '0 auto',
   };
+
   const buttonStyle = {
     margin: '5px',
     padding: '10px 20px',
     fontSize: '16px',
     cursor: 'pointer',
   };
+
   const formStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -100,6 +108,7 @@ function HomePage() {
     width: '100%',
     maxWidth: '400px',
   };
+
   const inputStyle = {
     margin: '5px',
     padding: '10px',
@@ -207,13 +216,6 @@ function HomePage() {
       )}
     </div>
   );
-}
+};
+
 export default HomePage;
-
-
-
-
-
-
-
-

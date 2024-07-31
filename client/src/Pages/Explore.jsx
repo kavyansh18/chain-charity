@@ -6,6 +6,7 @@ import img3 from '../assets/img3.png';
 import img4 from '../assets/img4.png';
 import img5 from '../assets/img5.png';
 import img6 from '../assets/img6.png';
+import Navbaar from '../Components/Navbaar';
 
 const CarouselItem = ({ imgSrc, title, topic, introduceDes, detailTitle, detailDes, showDetail }) => (
   <div className="item">
@@ -95,14 +96,10 @@ const Explore = () => {
 
   return (
     <div>
-      <header>
-        <div className="logo">karan</div>
-        <nav>
-          <a href="/">Home</a>
-          <a href="/">Info</a>
-          <a href="/">Contact</a>
-        </nav>
-      </header>
+      <div>
+      <Navbaar />
+      </div>
+    <div>
       <div className={`carousel ${showDetail ? 'showDetail' : ''}`} ref={carouselRef}>
         <div className="list">
           {items.map((item, index) => (
@@ -124,6 +121,7 @@ const Explore = () => {
           <button id="back">See All &#8599;</button>
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useOkto } from "okto-sdk-react";
 import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 
-function LoginPage() {
-
+const LoginPage = () => {
   console.log("LoginPage component rendered");
   const navigate = useNavigate();
-  const { authenticate } = useOkto();
+  const okto = useOkto();
   const [authToken, setAuthToken] = useState();
   const BASE_URL = "https://sandbox-api.okto.tech";
   const OKTO_CLIENT_API = "3469fac8-410e-4fab-8f16-a0345461045c";
@@ -40,9 +39,14 @@ function LoginPage() {
   };
 
   const handleGoogleLogin = async (credentialResponse) => {
+    if (!okto) {
+      console.error("Okto SDK is not initialized.");
+      return;
+    }
     console.log("Google login response:", credentialResponse);
     const idToken = credentialResponse.credential;
     console.log("google idtoken: ", idToken);
+    const { authenticate } = okto;
     authenticate(idToken, async (authResponse, error) => {
       if (authResponse) {
         console.log("Authentication check: ", authResponse);
@@ -58,13 +62,19 @@ function LoginPage() {
           });
         }
         console.log("auth token received", authToken);
-        navigate("/home");
+        navigate("/explore");
       }
       if (error) {
         console.error("Authentication error:", error);
       }
     });
   };
+
+  useEffect(() => {
+    if (!okto) {
+      console.error("Okto SDK is not initialized.");
+    }
+  }, [okto]);
 
   return (
     <div style={containerStyle}>
@@ -85,5 +95,6 @@ function LoginPage() {
       )}
     </div>
   );
-}
+};
+
 export default LoginPage;
