@@ -53,7 +53,7 @@ header nav a{
 /* carousel */
 .carousel{
     position: relative;
-    height: 580px;
+    height: 530px;
     overflow: hidden;
 }
 .carousel .list{
@@ -121,6 +121,9 @@ header nav a{
 }
 .specifications{
     font-size: 0.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .carousel .list .item .introduce .seeMore{
     font-family: Poppins;

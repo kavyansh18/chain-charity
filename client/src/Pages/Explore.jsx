@@ -8,6 +8,7 @@ import img5 from '../assets/img5.png';
 import img6 from '../assets/img6.png';
 import hunger from '../assets/hunger.png';
 import Navbaar from '../Components/Navbaar';
+import { NavLink } from 'react-router-dom';
 
 const CarouselItem = ({ imgSrc, title, topic, introduceDes, detailTitle, detailDes, showDetail, specifications }) => (
   <div className="item">
@@ -35,13 +36,14 @@ const CarouselItem = ({ imgSrc, title, topic, introduceDes, detailTitle, detailD
           <p>{specifications.helped}</p>
         </div>
         <div>
-          <p>Bluetooth</p>
+          <p>Since</p>
           <p>{specifications.since}</p>
         </div>
       </div>
       <div className="checkout">
         <button>FEEDBACK</button>
-        <button>DONATE</button>
+        <NavLink to='/donate'>
+        <button>DONATE</button></NavLink>
       </div>
     </div>
   </div>
