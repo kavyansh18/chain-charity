@@ -17,7 +17,6 @@ const LoginPage = () => {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: '20px',
     maxWidth: '800px',
     margin: '0 auto',
   };

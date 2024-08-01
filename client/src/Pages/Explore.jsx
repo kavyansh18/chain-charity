@@ -141,7 +141,7 @@ const Explore = () => {
     },
     {
       img: elder,
-      title: "DESIGN SLIDER",
+      title: "HelpAge India",
       topic: "Fighting isolation, poverty, neglect",
       introduce:
         "HelpAge India, established in 1978, is a non-profit dedicated to improving the quality of life for disadvantaged elderly. It envisions an active, healthy, and dignified life for seniors and was honored with the UN Population Award 2020 for its work in ageing and pandemic relief..",
@@ -149,7 +149,7 @@ const Explore = () => {
         "HelpAge India advocates for the rights of India's elderly, currently 138 million, through 26 State Offices. Its programs focus on healthcare, age care, livelihoods, disaster response, and advocacy. Notable initiatives include mobile healthcare units, cataract surgeries, elder helplines, senior care homes, and elder-self-help groups. HelpAge India actively promotes elder-friendly policies and their implementation. Donations qualify for 50% tax exemption under section 80G of the Income Tax Act, 1961.",
       specifications: {
         Across: "21 States",
-        dn: "Type-C",
+        dn: "21 Lakhs",
         helped: "35L Elders",
         since: "1994",
         web: "https://www.helpageindia.org/",
