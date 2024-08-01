@@ -65,10 +65,12 @@ const CarouselItem = ({
           </button>
         </NavLink>
 
+        <NavLink to="/feedback">
         <button class="btn">
           <span class="btn-text-one">Feedback</span>
           <span class="btn-text-two">Tell us</span>
         </button>
+        </NavLink>
       </div>
     </div>
   </div>

@@ -29,7 +29,7 @@ const Donate = () => {
       const response = await transferTokens(transferData);
       setTransferResponse(response);
       setOrderId(response.orderId);
-      setCopied(false); // Reset copy state
+      setCopied(false); 
     } catch (error) {
       setError(`Failed to transfer tokens: ${error.message}`);
     }
