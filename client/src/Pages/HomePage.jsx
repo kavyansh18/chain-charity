@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useOkto } from "okto-sdk-react";
+import Navbaar from "../Components/Navbaar";
 
 const HomePage = () => {
   console.log("homepage rendered");
@@ -10,6 +11,7 @@ const HomePage = () => {
   const [orderResponse, setOrderResponse] = useState(null);
   const [error, setError] = useState(null);
   const [activeSection, setActiveSection] = useState(null);
+  const [loading, setLoading] = useState(false); // Add loading state
   const { getUserDetails, getPortfolio, createWallet, orderHistory } = useOkto();
 
   const [orderData, setOrderData] = useState({
@@ -17,19 +19,22 @@ const HomePage = () => {
   });
 
   const fetchUserDetails = async () => {
+    setLoading(true); // Set loading to true when fetching starts
     try {
       const details = await getUserDetails();
       setUserDetails(details);
       setActiveSection("userDetails");
     } catch (error) {
       setError(`Failed to fetch user details: ${error.message}`);
+    } finally {
+      setLoading(false); // Set loading to false when fetching completes
     }
   };
 
   const fetchPortfolio = async () => {
+    setLoading(true);
     try {
       const portfolio = await getPortfolio();
-      // Adjust to handle data structure
       if (portfolio && Array.isArray(portfolio.tokens)) {
         setPortfolioData(portfolio.tokens);
       } else {
@@ -39,13 +44,15 @@ const HomePage = () => {
       setActiveSection("portfolio");
     } catch (error) {
       setError(`Failed to fetch portfolio: ${error.message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
   const fetchWallets = async () => {
+    setLoading(true);
     try {
       const walletsData = await createWallet();
-      // Adjust to handle data structure
       if (walletsData && Array.isArray(walletsData.wallets)) {
         setWallets(walletsData.wallets);
       } else {
@@ -55,17 +62,22 @@ const HomePage = () => {
       setActiveSection("wallets");
     } catch (error) {
       setError(`Failed to fetch wallets: ${error.message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleOrderCheck = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await orderHistory(orderData);
       setOrderResponse(response);
       setActiveSection("orderResponse");
     } catch (error) {
       setError(`Failed to fetch order status: ${error.message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -116,7 +128,9 @@ const HomePage = () => {
 
   return (
     <div style={containerStyle}>
-      <h1>Home Page</h1>
+      <div><Navbaar /></div>
+
+      <h1>User Profile</h1>
 
       <div>
         <button style={buttonStyle} onClick={fetchUserDetails}>
@@ -129,6 +143,8 @@ const HomePage = () => {
           View Wallets
         </button>
       </div>
+
+      {loading && <div>Loading...</div>} {/* Show loading indicator when fetching */}
 
       {activeSection === "userDetails" && userDetails && (
         <div>
