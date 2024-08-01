@@ -8,6 +8,7 @@ const Donate = () => {
   const [transferResponse, setTransferResponse] = useState(null);
   const [error, setError] = useState(null);
   const { transferTokens } = useOkto();
+  const [orderId, setOrderId] = useState(null); 
 
   const [transferData, setTransferData] = useState({
     network_name: "",
@@ -21,6 +22,7 @@ const Donate = () => {
     try {
       const response = await transferTokens(transferData);
       setTransferResponse(response);
+      setOrderId(response.orderId);
     } catch (error) {
       setError(`Failed to transfer tokens: ${error.message}`);
     }
@@ -36,13 +38,6 @@ const Donate = () => {
     alignItems: 'center',
     padding: '20px',
     margin: '0 auto',
-  };
-
-  const buttonStyle = {
-    margin: '5px',
-    padding: '10px 20px',
-    fontSize: '16px',
-    cursor: 'pointer',
   };
 
   const formStyle = {
@@ -103,13 +98,12 @@ const Donate = () => {
           onChange={handleInputChange}
           required
         />
-        <button className="my-4 align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85]" type="submit">Transfer Tokens</button>
+        <button className="my-3 align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85]" type="submit">Help</button>
       </form>
       {transferResponse && (
         <div>
           <h2>Transfer Response:</h2>
           <pre>{`Order ID: ${transferResponse.orderId}`}</pre>
-
         </div>
       )}
       {error && (
