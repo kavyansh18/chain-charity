@@ -452,9 +452,9 @@ header nav a{
 }
 .arrows{
     position: absolute;
-    bottom: 10px;
-    width: 1140px;
-    max-width: 90%;
+    bottom: 300px;
+    width: 1300px;
+    max-width: 97%;
     display: flex;
     justify-content: space-between;
     left: 50%;
@@ -478,7 +478,7 @@ header nav a{
 #back{
     position: absolute;
     z-index: 100;
-    bottom: 0%;
+    bottom: -720%;
     left: 50%;
     transform: translateX(-50%);
     border: none;
