@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useOkto } from "okto-sdk-react";
 import Navbaar from "../Components/Navbaar";
-import '/Users/anu/Desktop/Projects/okto-bounty/client/src/index.css'
+import '../index.css';
 
 const HomePage = () => {
   console.log("homepage rendered");
