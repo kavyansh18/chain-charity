@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useOkto } from "okto-sdk-react";
 import Navbaar from "../Components/Navbaar";
+import '/Users/anu/Desktop/Projects/okto-bounty/client/src/index.css'
 
 const HomePage = () => {
   console.log("homepage rendered");
@@ -8,7 +9,7 @@ const HomePage = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [portfolioData, setPortfolioData] = useState([]);
   const [wallets, setWallets] = useState([]);
-  const [orderResponse, setOrderResponse] = useState(null);
+  const [orderStatus, setOrderStatus] = useState([]);
   const [error, setError] = useState(null);
   const [activeSection, setActiveSection] = useState(null);
   const [loading, setLoading] = useState(false); // Add loading state
@@ -19,7 +20,7 @@ const HomePage = () => {
   });
 
   const fetchUserDetails = async () => {
-    setLoading(true); // Set loading to true when fetching starts
+    setLoading(true);
     try {
       const details = await getUserDetails();
       setUserDetails(details);
@@ -27,7 +28,7 @@ const HomePage = () => {
     } catch (error) {
       setError(`Failed to fetch user details: ${error.message}`);
     } finally {
-      setLoading(false); // Set loading to false when fetching completes
+      setLoading(false);
     }
   };
 
@@ -67,18 +68,28 @@ const HomePage = () => {
     }
   };
 
-  const handleOrderCheck = async (e) => {
-    e.preventDefault();
+  const fetchOrderStatus = async () => {
     setLoading(true);
     try {
       const response = await orderHistory(orderData);
-      setOrderResponse(response);
+      // Assuming response contains jobs array
+      if (response && Array.isArray(response.jobs)) {
+        setOrderStatus(response.jobs);
+      } else {
+        console.error("Order response is not in expected format:", response);
+        setOrderStatus([]);
+      }
       setActiveSection("orderResponse");
     } catch (error) {
       setError(`Failed to fetch order status: ${error.message}`);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleOrderCheck = (e) => {
+    e.preventDefault();
+    fetchOrderStatus(); // Fetch order status on form submit
   };
 
   const handleInputChangeOrders = (e) => {
@@ -89,8 +100,6 @@ const HomePage = () => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: "20px",
-    maxWidth: "800px",
     margin: "0 auto",
   };
 
@@ -112,27 +121,26 @@ const HomePage = () => {
   const inputStyle = {
     margin: "5px",
     padding: "10px",
-    width: "100%",
+    width: '24rem',
     fontSize: "16px",
+    borderRadius: '40px'
   };
 
   const renderDetails = (details) => (
     <div>
       {Object.entries(details).map(([key, value]) => (
         <div key={key}>
-          <strong>{key.replace(/_/g, " ")}:</strong> {value}
+          <strong>{key.replace(/_/g, " ")}:</strong> {typeof value === 'object' ? JSON.stringify(value) : value}
         </div>
       ))}
     </div>
   );
 
   return (
-    <div style={containerStyle}>
-      <div><Navbaar /></div>
+    <div className="bg-gradient-to-r from-neutral-300 to-stone-400 w-screen h-screen " style={containerStyle}>
+      <div className="mb-6"><Navbaar /></div>
 
-      <h1>User Profile</h1>
-
-      <div>
+      <div className="glass mb-6">
         <button style={buttonStyle} onClick={fetchUserDetails}>
           View User Details
         </button>
@@ -141,6 +149,9 @@ const HomePage = () => {
         </button>
         <button style={buttonStyle} onClick={fetchWallets}>
           View Wallets
+        </button>
+        <button style={buttonStyle} onClick={() => setActiveSection("checkOrder")}>
+          Check Order Status
         </button>
       </div>
 
@@ -173,26 +184,34 @@ const HomePage = () => {
         </div>
       )}
 
-      <h2>Check Order</h2>
-      <form style={formStyle} onSubmit={handleOrderCheck}>
-        <input
-          style={inputStyle}
-          type="text"
-          name="order_id"
-          placeholder="Order Id"
-          value={orderData.order_id}
-          onChange={handleInputChangeOrders}
-          required
-        />
-        <button style={buttonStyle} type="submit">
-          Check Status
-        </button>
-      </form>
+      {activeSection === "checkOrder" && (
+        <div>
+          <h2 className="flex justify-center items-center py-3">Check Order</h2>
+          <form style={formStyle} onSubmit={handleOrderCheck}>
+            <input
+              style={inputStyle}
+              type="text"
+              name="order_id"
+              placeholder="Order Id"
+              value={orderData.order_id}
+              onChange={handleInputChangeOrders}
+              required
+            />
+            <button style={buttonStyle} className="align-middle select-none font-sans text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-5 rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85]" type="submit">
+              Check Status
+            </button>
+          </form>
+        </div>
+      )}
 
-      {activeSection === "orderResponse" && orderResponse && (
+      {activeSection === "orderResponse" && orderStatus.length > 0 && (
         <div>
           <h2>Order Status:</h2>
-          {renderDetails(orderResponse)}
+          {orderStatus.map((status, index) => (
+            <div key={index} style={{ marginBottom: "10px" }}>
+              {renderDetails(status)}
+            </div>
+          ))}
         </div>
       )}
 
