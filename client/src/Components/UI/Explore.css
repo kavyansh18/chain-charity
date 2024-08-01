@@ -80,6 +80,7 @@ header nav a{
     transform: translateX(0);
 }
 .carousel .list .item img{
+    border-radius: 30px;
     width: 40%;
     position: absolute;
     right: 0;

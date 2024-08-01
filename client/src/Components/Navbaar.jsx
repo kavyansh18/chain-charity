@@ -5,7 +5,7 @@ const Navbaar = () => {
   return (
     <div >
       <header >
-        <div className="logo">karan</div>
+        <div className="logo">NGO Donations</div>
         <nav>
         <NavLink className='hover:bg-black' to="/explore">
             Home
