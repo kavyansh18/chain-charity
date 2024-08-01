@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const Navbaar = () => {
   return (
-    <div >
+    <div className=' w-screen' >
       <header >
         <div className="logo">NGO Donations</div>
         <nav>

@@ -138,7 +138,7 @@ const HomePage = () => {
 
   return (
     <div className="bg-gradient-to-r from-neutral-300 to-stone-400 w-screen h-screen " style={containerStyle}>
-      <div className="mb-6"><Navbaar /></div>
+      <div className="mb-6 bg-gradient-to-b from-red-50 to-neutral-400"><Navbaar /></div>
 
       <div className="glass mb-6">
         <button style={buttonStyle} onClick={fetchUserDetails}>

@@ -204,6 +204,12 @@ header nav a{
 .carousel .list .item .introduce .seeMore:hover{
     background: #eee;
 }
+.introduce{
+    padding-right: 5rem;
+}
+.seeMore{
+    font-size: 0.7rem;
+}
 .carousel .list .item:nth-child(1){
     transform: var(--item1-transform);
     filter: var(--item1-filter);
@@ -379,6 +385,55 @@ header nav a{
     background-color: #693EFF;
     color: #eee;
 }
+.checkout{
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+.btn {
+    width: 105px;
+    height: 36px;
+    background: linear-gradient(to top, #00154c, #12376e, #23487f);
+    color: #fff;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+  }
+  
+  .btn span {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: top 0.5s;
+  }
+  
+  .btn-text-one {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+  
+  .btn-text-two {
+    position: absolute;
+    width: 100%;
+    top: 150%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+  
+  .btn:hover .btn-text-one {
+    top: -100%;
+  }
+  
+  .btn:hover .btn-text-two {
+    top: 50%;
+  }
+  
 .carousel.showDetail .list .item:nth-child(2) .detail  .title,
 .carousel.showDetail .list .item:nth-child(2) .detail  .des,
 .carousel.showDetail .list .item:nth-child(2) .detail .specifications,
