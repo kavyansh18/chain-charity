@@ -43,7 +43,7 @@ const Donate = () => {
     setTransferResponse(null);
     setOrderId(null);
     setQuantity("");
-    setCopied(false); // Reset copy state
+    setCopied(false);
   };
 
   const handleCopy = () => {
@@ -87,7 +87,7 @@ const Donate = () => {
             style={inputStyle}
             type="text"
             name="quantity"
-            placeholder="Quantity"
+            placeholder="Quantity (in MATIC)"
             value={quantity}
             onChange={handleQuantityChange}
             required
