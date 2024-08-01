@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useOkto } from "okto-sdk-react";
 import Navbaar from "../Components/Navbaar";
 import '/Users/anu/Desktop/Projects/okto-bounty/client/src/index.css'
@@ -11,13 +11,17 @@ const HomePage = () => {
   const [wallets, setWallets] = useState([]);
   const [orderStatus, setOrderStatus] = useState([]);
   const [error, setError] = useState(null);
-  const [activeSection, setActiveSection] = useState(null);
+  const [activeSection, setActiveSection] = useState("userDetails"); // Set default section to userDetails
   const [loading, setLoading] = useState(false); // Add loading state
   const { getUserDetails, getPortfolio, createWallet, orderHistory } = useOkto();
 
   const [orderData, setOrderData] = useState({
     order_id: "",
   });
+
+  useEffect(() => {
+    fetchUserDetails();
+  }, []);
 
   const fetchUserDetails = async () => {
     setLoading(true);
