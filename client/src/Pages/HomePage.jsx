@@ -7,18 +7,10 @@ const HomePage = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [portfolioData, setPortfolioData] = useState(null);
   const [wallets, setWallets] = useState(null);
-  const [transferResponse, setTransferResponse] = useState(null);
   const [orderResponse, setOrderResponse] = useState(null);
   const [error, setError] = useState(null);
   const [activeSection, setActiveSection] = useState(null);
-  const { getUserDetails, getPortfolio, createWallet, transferTokens, orderHistory } = useOkto();
-
-  const [transferData, setTransferData] = useState({
-    network_name: "",
-    token_address: "",
-    quantity: "",
-    recipient_address: "",
-  });
+  const { getUserDetails, getPortfolio, createWallet, orderHistory } = useOkto();
 
   const [orderData, setOrderData] = useState({
     order_id: "",
@@ -53,21 +45,6 @@ const HomePage = () => {
     } catch (error) {
       setError(`Failed to fetch wallets: ${error.message}`);
     }
-  };
-
-  const handleTransferTokens = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await transferTokens(transferData);
-      setTransferResponse(response);
-      setActiveSection('transferResponse');
-    } catch (error) {
-      setError(`Failed to transfer tokens: ${error.message}`);
-    }
-  };
-
-  const handleInputChange = (e) => {
-    setTransferData({ ...transferData, [e.target.name]: e.target.value });
   };
 
   const handleOrderCheck = async (e) => {
@@ -141,52 +118,6 @@ const HomePage = () => {
         <div>
           <h2>Wallets:</h2>
           <pre>{JSON.stringify(wallets, null, 2)}</pre>
-        </div>
-      )}
-      <h2>Transfer Tokens</h2>
-      <form style={formStyle} onSubmit={handleTransferTokens}>
-        <input
-          style={inputStyle}
-          type="text"
-          name="network_name"
-          placeholder="Network Name"
-          value={transferData.network_name}
-          onChange={handleInputChange}
-          required
-        />
-        <input
-          style={inputStyle}
-          type="text"
-          name="token_address"
-          placeholder="Token Address"
-          value={transferData.token_address}
-          onChange={handleInputChange}
-          required
-        />
-        <input
-          style={inputStyle}
-          type="text"
-          name="quantity"
-          placeholder="Quantity"
-          value={transferData.quantity}
-          onChange={handleInputChange}
-          required
-        />
-        <input
-          style={inputStyle}
-          type="text"
-          name="recipient_address"
-          placeholder="Recipient Address"
-          value={transferData.recipient_address}
-          onChange={handleInputChange}
-          required
-        />
-        <button style={buttonStyle} type="submit">Transfer Tokens</button>
-      </form>
-      {activeSection === 'transferResponse' && transferResponse && (
-        <div>
-          <h2>Transfer Response:</h2>
-          <pre>{JSON.stringify(transferResponse, null, 2)}</pre>
         </div>
       )}
       <h2>Check Order</h2>

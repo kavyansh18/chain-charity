@@ -7,13 +7,13 @@ const Navbaar = () => {
       <header >
         <div className="logo">NGO Donations</div>
         <nav>
-        <NavLink className='hover:bg-black' to="/explore">
+        <NavLink to="/explore">
             Home
           </NavLink>
-          <NavLink className='hover:bg-black' to="/home">
+          <NavLink to="/home">
             Profile
           </NavLink>
-          <NavLink className='hover:bg-black' to="/login">
+          <NavLink to="/login">
             Login
           </NavLink>
         </nav>
