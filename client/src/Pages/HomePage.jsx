@@ -11,14 +11,16 @@ const HomePage = () => {
   const [wallets, setWallets] = useState([]);
   const [orderStatus, setOrderStatus] = useState([]);
   const [error, setError] = useState(null);
-  const [activeSection, setActiveSection] = useState("userDetails"); // Set default section to userDetails
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [activeSection, setActiveSection] = useState("userDetails");
+  const [loading, setLoading] = useState(false);
+  const [selectedOrderId, setSelectedOrderId] = useState("");
   const { getUserDetails, getPortfolio, createWallet, orderHistory } = useOkto();
 
   const [orderData, setOrderData] = useState({
     order_id: "",
   });
 
+  const orderIds = ["ce217444-0a09-4fb5-b3a3-2675354781fa", "0c036ac4-eae6-40cd-9244-7472b4571371", "114beb66-596c-4911-86bb-a4f9cc8e6571", "a2087ba8-48be-4386-b2e1-3291970d4292", "aebc1df2-aaae-426b-be17-13d86900ea6b"]; 
   useEffect(() => {
     fetchUserDetails();
   }, []);
@@ -75,8 +77,7 @@ const HomePage = () => {
   const fetchOrderStatus = async () => {
     setLoading(true);
     try {
-      const response = await orderHistory(orderData);
-      // Assuming response contains jobs array
+      const response = await orderHistory({ order_id: selectedOrderId });
       if (response && Array.isArray(response.jobs)) {
         setOrderStatus(response.jobs);
       } else {
@@ -96,8 +97,8 @@ const HomePage = () => {
     fetchOrderStatus(); 
   };
 
-  const handleInputChangeOrders = (e) => {
-    setOrderData({ ...orderData, [e.target.name]: e.target.value });
+  const handleDropdownChange = (e) => {
+    setSelectedOrderId(e.target.value);
   };
 
   const containerStyle = {
@@ -127,7 +128,7 @@ const HomePage = () => {
     padding: "10px",
     width: '24rem',
     fontSize: "16px",
-    borderRadius: '40px'
+    borderRadius: '40px',
   };
 
   const renderDetails = (details) => (
@@ -192,15 +193,20 @@ const HomePage = () => {
         <div>
           <h2 className="flex justify-center items-center py-3">Check Order</h2>
           <form style={formStyle} onSubmit={handleOrderCheck}>
-            <input
+            <select
               style={inputStyle}
-              type="text"
               name="order_id"
-              placeholder="Order Id"
-              value={orderData.order_id}
-              onChange={handleInputChangeOrders}
+              value={selectedOrderId}
+              onChange={handleDropdownChange}
               required
-            />
+            >
+              <option value="">Select Order ID</option>
+              {orderIds.map((orderId) => (
+                <option key={orderId} value={orderId}>
+                  {orderId}
+                </option>
+              ))}
+            </select>
             <button style={buttonStyle} className="align-middle select-none font-sans text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-5 rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85]" type="submit">
               Check Status
             </button>
