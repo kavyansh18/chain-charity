@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useOkto } from "okto-sdk-react";
 import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import Navbaar from "../Components/Navbaar";
 
 const LoginPage = () => {
   console.log("LoginPage component rendered");
@@ -78,6 +79,7 @@ const LoginPage = () => {
 
   return (
     <div style={containerStyle}>
+      <Navbaar />
       <h1>Login</h1>
       {!authToken ? (
         <GoogleLogin

@@ -16,6 +16,9 @@ const Navbaar = () => {
           <NavLink to="/login">
             Login
           </NavLink>
+          <NavLink to="/register">
+            Register as NGO
+          </NavLink>
         </nav>
       </header>
     </div>

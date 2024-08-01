@@ -93,7 +93,7 @@ const HomePage = () => {
 
   const handleOrderCheck = (e) => {
     e.preventDefault();
-    fetchOrderStatus(); // Fetch order status on form submit
+    fetchOrderStatus(); 
   };
 
   const handleInputChangeOrders = (e) => {
