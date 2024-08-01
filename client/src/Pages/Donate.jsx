@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useOkto } from "okto-sdk-react";
+import '/Users/anu/Desktop/Projects/okto-bounty/client/src/index.css'
 
 const Donate = () => {
   //console.log("homepage rendered");
@@ -34,7 +35,6 @@ const Donate = () => {
     flexDirection: 'column',
     alignItems: 'center',
     padding: '20px',
-    maxWidth: '800px',
     margin: '0 auto',
   };
 
@@ -51,18 +51,21 @@ const Donate = () => {
     alignItems: 'center',
     width: '100%',
     maxWidth: '400px',
+
   };
 
   const inputStyle = {
     margin: '5px',
     padding: '10px',
-    width: '100%',
+    width: '27rem',
     fontSize: '16px',
+    borderRadius:'40px'
   };
 
   return (
-    <div style={containerStyle}>
-      <h1>Transfer Tokens</h1>
+    <div className="bg-gradient-to-r from-neutral-300 to-stone-400 w-screen h-screen flex justify-center items-center" style={containerStyle}>
+      <div className="glass px-20 py-8 ">
+      <h1 className="mb-5 flex justify-center items-center text-2xl">Donate for good</h1>
       <form style={formStyle} onSubmit={handleTransferTokens}>
         <input
           style={inputStyle}
@@ -100,13 +103,13 @@ const Donate = () => {
           onChange={handleInputChange}
           required
         />
-        <button style={buttonStyle} type="submit">Transfer Tokens</button>
+        <button className="my-4 align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85]" type="submit">Transfer Tokens</button>
       </form>
       {transferResponse && (
         <div>
           <h2>Transfer Response:</h2>
-          <p>Order ID: {transferResponse.order_id}</p>
-          <pre>{JSON.stringify(transferResponse, null, 2)}</pre>
+          <pre>{`Order ID: ${transferResponse.orderId}`}</pre>
+
         </div>
       )}
       {error && (
@@ -115,6 +118,7 @@ const Donate = () => {
           <p>{error}</p>
         </div>
       )}
+    </div>
     </div>
   );
 };
