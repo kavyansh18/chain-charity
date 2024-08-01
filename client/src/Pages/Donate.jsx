@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useOkto } from "okto-sdk-react";
 import Modal from "react-modal";
-import '/Users/anu/Desktop/Projects/okto-bounty/client/src/index.css'
+import '../index.css';
 import copy from '../assets/copy.svg'
 import Navbaar from "../Components/Navbaar";
 
