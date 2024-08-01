@@ -2,16 +2,11 @@ import React, { useState } from "react";
 import { useOkto } from "okto-sdk-react";
 
 const Donate = () => {
-  //console.log("donate rendered");
+  //console.log("homepage rendered");
 
-  const [userDetails, setUserDetails] = useState(null);
-  const [portfolioData, setPortfolioData] = useState(null);
-  const [wallets, setWallets] = useState(null);
   const [transferResponse, setTransferResponse] = useState(null);
-  const [orderResponse, setOrderResponse] = useState(null);
   const [error, setError] = useState(null);
-  const [activeSection, setActiveSection] = useState(null);
-  const { getUserDetails, getPortfolio, createWallet, transferTokens, orderHistory } = useOkto();
+  const { transferTokens } = useOkto();
 
   const [transferData, setTransferData] = useState({
     network_name: "",
@@ -20,47 +15,11 @@ const Donate = () => {
     recipient_address: "",
   });
 
-  const [orderData, setOrderData] = useState({
-    order_id: "",
-  });
-
-  const fetchUserDetails = async () => {
-    try {
-      const details = await getUserDetails();
-      setUserDetails(details);
-      setActiveSection('userDetails');
-    } catch (error) {
-      setError(`Failed to fetch user details: ${error.message}`);
-    }
-  };
-
-  const fetchPortfolio = async () => {
-    try {
-      const portfolio = await getPortfolio();
-      setPortfolioData(portfolio);
-      setActiveSection('portfolio');
-    } catch (error) {
-      setError(`Failed to fetch portfolio: ${error.message}`);
-    }
-  };
-
-  const fetchWallets = async () => {
-    try {
-      const walletsData = await createWallet();
-      console.log(walletsData);
-      setWallets(walletsData);
-      setActiveSection('wallets');
-    } catch (error) {
-      setError(`Failed to fetch wallets: ${error.message}`);
-    }
-  };
-
   const handleTransferTokens = async (e) => {
     e.preventDefault();
     try {
       const response = await transferTokens(transferData);
       setTransferResponse(response);
-      setActiveSection('transferResponse');
     } catch (error) {
       setError(`Failed to transfer tokens: ${error.message}`);
     }
@@ -68,21 +27,6 @@ const Donate = () => {
 
   const handleInputChange = (e) => {
     setTransferData({ ...transferData, [e.target.name]: e.target.value });
-  };
-
-  const handleOrderCheck = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await orderHistory(orderData);
-      setOrderResponse(response);
-      setActiveSection('orderResponse');
-    } catch (error) {
-      setError(`Failed to fetch order status: ${error.message}`);
-    }
-  };
-
-  const handleInputChangeOrders = (e) => {
-    setOrderData({ ...orderData, [e.target.name]: e.target.value });
   };
 
   const containerStyle = {
@@ -118,30 +62,7 @@ const Donate = () => {
 
   return (
     <div style={containerStyle}>
-      <div>
-        <button style={buttonStyle} onClick={fetchUserDetails}>View User Details</button>
-        <button style={buttonStyle} onClick={fetchPortfolio}>View Portfolio</button>
-        <button style={buttonStyle} onClick={fetchWallets}>View Wallets</button>
-      </div>
-      {activeSection === 'userDetails' && userDetails && (
-        <div>
-          <h2>User Details:</h2>
-          <pre>{JSON.stringify(userDetails, null, 2)}</pre>
-        </div>
-      )}
-      {activeSection === 'portfolio' && portfolioData && (
-        <div>
-          <h2>Portfolio Data:</h2>
-          <pre>{JSON.stringify(portfolioData, null, 2)}</pre>
-        </div>
-      )}
-      {activeSection === 'wallets' && wallets && (
-        <div>
-          <h2>Wallets:</h2>
-          <pre>{JSON.stringify(wallets, null, 2)}</pre>
-        </div>
-      )}
-      <h2>Transfer Tokens</h2>
+      <h1>Transfer Tokens</h1>
       <form style={formStyle} onSubmit={handleTransferTokens}>
         <input
           style={inputStyle}
@@ -181,29 +102,11 @@ const Donate = () => {
         />
         <button style={buttonStyle} type="submit">Transfer Tokens</button>
       </form>
-      {activeSection === 'transferResponse' && transferResponse && (
+      {transferResponse && (
         <div>
           <h2>Transfer Response:</h2>
+          <p>Order ID: {transferResponse.order_id}</p>
           <pre>{JSON.stringify(transferResponse, null, 2)}</pre>
-        </div>
-      )}
-      <h2>Check Order</h2>
-      <form style={formStyle} onSubmit={handleOrderCheck}>
-        <input
-          style={inputStyle}
-          type="text"
-          name="order_id"
-          placeholder="Order Id"
-          value={orderData.order_id}
-          onChange={handleInputChangeOrders}
-          required
-        />
-        <button style={buttonStyle} type="submit">Check Status</button>
-      </form>
-      {activeSection === 'orderResponse' && orderResponse && (
-        <div>
-          <h2>Order Status:</h2>
-          <pre>{JSON.stringify(orderResponse, null, 2)}</pre>
         </div>
       )}
       {error && (
