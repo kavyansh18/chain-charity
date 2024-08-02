@@ -78,9 +78,11 @@ const Navbaar = () => {
   return (
     <div className="w-screen h-16 ">
       <header>
+      <NavLink to="/explore">
         <div className="logo mt-3">
           <img className="w-32 rounded-3xl" src={logo} alt="Logo" />
         </div>
+        </NavLink>
         <nav className="mt-2 flex justify-center items-center">
           <NavLink to="/explore">Home</NavLink>
           <NavLink to="/home">Profile</NavLink>
