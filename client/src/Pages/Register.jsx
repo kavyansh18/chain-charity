@@ -35,8 +35,8 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col items-center bg-gradient-to-r from-neutral-300 to-stone-300 w-screen h-screen ">
-        <Navbaar />
+    <div className="flex flex-col items-center bg-gradient-to-r from-rose-100 to-teal-100 w-screen h-screen ">
+        <div className=" bg-red-50 border border-b-2 border-blue-600"><Navbaar /></div>
         <h1 className="mb-5 mt-2 font-bold text-xl">Register as NGO </h1>
       <form onSubmit={handleSubmit} className="glass flex flex-col items-center space-y-4 w-full max-w-md px-5 py-5">
         <label className="w-full">

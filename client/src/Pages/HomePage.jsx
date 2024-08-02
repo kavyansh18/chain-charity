@@ -190,8 +190,8 @@ const HomePage = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-neutral-300 to-stone-200 w-screen h-screen " style={containerStyle}>
-      <div className="mb-6 bg-gradient-to-b from-red-50 to-neutral-400"><Navbaar /></div>
+    <div className="bg-gradient-to-r from-rose-100 to-teal-100 w-screen h-screen " style={containerStyle}>
+      <div className="mb-6 bg-red-50 border border-b-2 border-blue-600"><Navbaar /></div>
 
       <div className="glass mb-6">
         <button style={buttonStyle} onClick={fetchUserDetails}>
@@ -211,26 +211,26 @@ const HomePage = () => {
       {loading && <div>Loading...</div>} {/* Show loading indicator when fetching */}
 
       {activeSection === "userDetails" && userDetails && (
-        <div className="bg-slate-300 mt-5 p-6 rounded-2xl">
+        <div className="glass mt-5 p-6 rounded-2xl">
           <h2>User Details:</h2>
           {renderTable(filterFields([userDetails], ['freezed']))}
         </div>
       )}
       {activeSection === "portfolio" && portfolioData.length > 0 && (
-        <div className="bg-slate-300 mt-5 p-6 rounded-2xl">
+        <div className="glass mt-5 p-6 rounded-2xl">
           <h2>Portfolio Data:</h2>
           {renderTable(filterFields(portfolioData, ['amount_in_inr']))}
         </div>
       )}
       {activeSection === "wallets" && wallets.length > 0 && (
-        <div className="bg-slate-300 mt-5 p-6 rounded-2xl">
+        <div className="glass mt-5 p-6 rounded-2xl">
           <h2>Wallets:</h2>
           {renderTable(filterFields(wallets, ['success']))}
         </div>
       )}
 
       {activeSection === "checkOrder" && (
-        <div className="bg-slate-300 mt-5 p-6 rounded-2xl">
+        <div className="glass mt-5 p-6 rounded-2xl">
           <h2 className="flex justify-center items-center py-3">Check Order</h2>
           <form style={formStyle} onSubmit={handleOrderCheck}>
             <select
@@ -255,7 +255,7 @@ const HomePage = () => {
       )}
 
       {activeSection === "orderResponse" && orderStatus.length > 0 && (
-        <div className="bg-slate-300 mt-5 p-4 mx-6 rounded-2xl text-sm">
+        <div className="glass mt-5 p-4 mx-6 rounded-2xl text-sm">
           <h2>Order Status:</h2>
           {renderTable(orderStatus)}
         </div>

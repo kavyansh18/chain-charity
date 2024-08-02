@@ -78,8 +78,8 @@ const Donate = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-neutral-300 to-stone-300 w-screen h-screen " style={containerStyle}>
-      <Navbaar />
+    <div className="bg-gradient-to-r from-rose-100 to-teal-100  w-screen h-screen " style={containerStyle}>
+      <div className="mb-6 bg-red-50 border border-b-2 border-blue-600"><Navbaar /></div>
       <div className="glass px-20 py-8 mt-8">
         <h1 className="mb-5 flex justify-center items-center text-2xl">Donate for good</h1>
         <form style={formStyle} onSubmit={handleTransferTokens}>

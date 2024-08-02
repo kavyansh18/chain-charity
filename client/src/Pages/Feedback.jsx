@@ -22,8 +22,8 @@ const Feedback = () => {
   };
 
   return (
-    <div className="flex flex-col items-center bg-gradient-to-r from-neutral-300 to-stone-400 bg-gray-100 min-h-screen">
-      <Navbaar />
+    <div className="flex flex-col items-center bg-gradient-to-r from-rose-100 to-teal-100  min-h-screen">
+      <div className=" bg-red-50 border border-b-2 border-blue-600"><Navbaar /></div>
       <h1 className="text-2xl font-bold mb-6">Want to hear you!</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full glass max-w-lg bg-white p-6 rounded-lg shadow-lg">
         <div className="mb-4">

@@ -208,7 +208,7 @@ const Explore = () => {
   return (
     <div>
       <div className="bg-red-50">
-        <Navbaar />
+      <div className=" bg-red-50 border border-b-2 border-blue-600"><Navbaar /></div>
       </div>
       <div>
         <div
