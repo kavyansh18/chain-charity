@@ -2,6 +2,7 @@
 # Chain Charity
 
 Chain Charity is a dedicated platform connecting NGOs with donors, leveraging the Okto SDK for secure and transparent transactions. Our platform simplifies the donation process, particularly for NRI donors, and provides a seamless user experience for both NGOs and contributors.
+It's very important for NRIs to send funds to Indian NGOs which is very hard due to banking and legal limitations.
 
 ## Live Demo
 
