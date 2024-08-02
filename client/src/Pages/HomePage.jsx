@@ -170,7 +170,7 @@ const HomePage = () => {
         <thead>
           <tr>
             {Object.keys(filteredData[0]).map((key) => (
-              <th className="border border-gray-300 px-4 py-2" key={key}>{key.replace(/_/g, " ")}</th>
+              <th className="border border-black px-4 py-2" key={key}>{key.replace(/_/g, " ")}</th>
             ))}
           </tr>
         </thead>
@@ -178,7 +178,7 @@ const HomePage = () => {
           {filteredData.map((item, index) => (
             <tr key={index}>
               {Object.values(item).map((value, i) => (
-                <td className="border border-gray-300 px-4 py-2" key={i}>
+                <td className="border border-black px-4 py-2" key={i}>
                   {typeof value === 'object' ? JSON.stringify(value) : value}
                 </td>
               ))}
@@ -211,26 +211,26 @@ const HomePage = () => {
       {loading && <div>Loading...</div>} {/* Show loading indicator when fetching */}
 
       {activeSection === "userDetails" && userDetails && (
-        <div className="bg-gray-400 mt-5 p-6 rounded-2xl">
+        <div className="bg-slate-300 mt-5 p-6 rounded-2xl">
           <h2>User Details:</h2>
           {renderTable(filterFields([userDetails], ['freezed']))}
         </div>
       )}
       {activeSection === "portfolio" && portfolioData.length > 0 && (
-        <div className="bg-gray-400 mt-5 p-6 rounded-2xl">
+        <div className="bg-slate-300 mt-5 p-6 rounded-2xl">
           <h2>Portfolio Data:</h2>
           {renderTable(filterFields(portfolioData, ['amount_in_inr']))}
         </div>
       )}
       {activeSection === "wallets" && wallets.length > 0 && (
-        <div className="bg-gray-400 mt-5 p-6 rounded-2xl">
+        <div className="bg-slate-300 mt-5 p-6 rounded-2xl">
           <h2>Wallets:</h2>
           {renderTable(filterFields(wallets, ['success']))}
         </div>
       )}
 
       {activeSection === "checkOrder" && (
-        <div className="bg-gray-400 mt-5 p-6 rounded-2xl">
+        <div className="bg-slate-300 mt-5 p-6 rounded-2xl">
           <h2 className="flex justify-center items-center py-3">Check Order</h2>
           <form style={formStyle} onSubmit={handleOrderCheck}>
             <select
@@ -255,7 +255,7 @@ const HomePage = () => {
       )}
 
       {activeSection === "orderResponse" && orderStatus.length > 0 && (
-        <div className="bg-gray-400 mt-5 p-4 mx-6 rounded-2xl text-sm">
+        <div className="bg-slate-300 mt-5 p-4 mx-6 rounded-2xl text-sm">
           <h2>Order Status:</h2>
           {renderTable(orderStatus)}
         </div>
