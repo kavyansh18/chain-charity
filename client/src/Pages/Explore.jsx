@@ -226,7 +226,7 @@ const Explore = () => {
                 detailTitle={item.topic}
                 detailDes={item.detail}
                 showDetail={() => setShowDetail(true)}
-                specifications={item.specifications} // Pass specifications to CarouselItem
+                specifications={item.specifications} 
               />
             ))}
           </div>

@@ -76,8 +76,11 @@ header nav a{
     opacity: 0;
 }
 .carousel .list .item:nth-child(2){
-    z-index: 10;
+    z-index: 1;
     transform: translateX(0);
+}
+.item img{
+    z-index: 100;
 }
 
 /* Modal overlay */
