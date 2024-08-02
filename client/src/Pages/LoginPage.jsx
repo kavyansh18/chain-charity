@@ -9,7 +9,8 @@ const LoginPage = () => {
   console.log("LoginPage component rendered");
   const navigate = useNavigate();
   const okto = useOkto();
-  const [authToken, setAuthToken] = useState();
+  const [authToken, setAuthToken] = useState(null);
+  const [isGoogleLoginVisible, setIsGoogleLoginVisible] = useState(false);
   const BASE_URL = "https://sandbox-api.okto.tech";
   const OKTO_CLIENT_API = "3469fac8-410e-4fab-8f16-a0345461045c";
 
@@ -19,6 +20,13 @@ const LoginPage = () => {
     alignItems: 'center',
     maxWidth: '800px',
     margin: '0 auto',
+  };
+
+  const buttonStyle = {
+    margin: '5px',
+    padding: '10px 20px',
+    fontSize: '16px',
+    cursor: 'pointer',
   };
 
   const apiService = axios.create({
@@ -45,11 +53,11 @@ const LoginPage = () => {
     }
     console.log("Google login response:", credentialResponse);
     const idToken = credentialResponse.credential;
-    console.log("google idtoken: ", idToken);
+    console.log("Google ID token:", idToken);
     const { authenticate } = okto;
     authenticate(idToken, async (authResponse, error) => {
       if (authResponse) {
-        console.log("Authentication check: ", authResponse);
+        console.log("Authentication response:", authResponse);
         setAuthToken(authResponse.auth_token);
         if (!authToken && authResponse.action === "signup") {
           console.log("User Signup");
@@ -61,7 +69,7 @@ const LoginPage = () => {
             }
           });
         }
-        console.log("auth token received", authToken);
+        console.log("Auth token received:", authToken);
         navigate("/explore");
       }
       if (error) {
@@ -76,23 +84,34 @@ const LoginPage = () => {
     }
   }, [okto]);
 
+  const handleLoginButtonClick = () => {
+    setIsGoogleLoginVisible(true);
+  };
+
   return (
     <div style={containerStyle}>
       <Navbaar />
       <h1>Login</h1>
       {!authToken ? (
-        <GoogleLogin
-          onSuccess={handleGoogleLogin}
-          onError={(error) => {
-            console.log("Login Failed", error);
-          }}
-          useOneTap
-          promptMomentNotification={(notification) =>
-            console.log("Prompt moment notification:", notification)
-          }
-        />
+        <div>
+          <button style={buttonStyle} onClick={handleLoginButtonClick}>
+            Login
+          </button>
+          {isGoogleLoginVisible && (
+            <GoogleLogin
+              onSuccess={handleGoogleLogin}
+              onError={(error) => {
+                console.log("Login Failed", error);
+              }}
+              useOneTap
+              promptMomentNotification={(notification) =>
+                console.log("Prompt moment notification:", notification)
+              }
+            />
+          )}
+        </div>
       ) : (
-        <> Authenticated </>
+        <>Authenticated</>
       )}
     </div>
   );
