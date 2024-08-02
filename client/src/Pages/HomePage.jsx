@@ -15,9 +15,9 @@ const HomePage = () => {
   const { getUserDetails, getPortfolio, createWallet, orderHistory } = useOkto();
 
   const [orderIds] = useState([
-    "ce217444-0a09-4fb5-b3a3-2675354781fa", 
-    "0c036ac4-eae6-40cd-9244-7472b4571371", 
-    "a2087ba8-48be-4386-b2e1-3291970d4292", 
+    "ce217444-0a09-4fb5-b3a3-2675354781fa",
+    "0c036ac4-eae6-40cd-9244-7472b4571371",
+    "a2087ba8-48be-4386-b2e1-3291970d4292",
     "aebc1df2-aaae-426b-be17-13d86900ea6b",
     "c15ebd93-c6b7-48c5-8866-fefd3cea1570"
   ]);
@@ -111,7 +111,7 @@ const HomePage = () => {
 
   const handleOrderCheck = (e) => {
     e.preventDefault();
-    fetchOrderStatus(); 
+    fetchOrderStatus();
   };
 
   const handleDropdownChange = (e) => {
@@ -148,18 +148,49 @@ const HomePage = () => {
     borderRadius: '40px',
   };
 
-  const renderDetails = (details) => (
-    <div>
-      {Object.entries(details).map(([key, value]) => (
-        <div key={key}>
-          <strong>{key.replace(/_/g, " ")}:</strong> {typeof value === 'object' ? JSON.stringify(value) : value}
-        </div>
-      ))}
-    </div>
-  );
+  const filterFields = (data, fieldsToExclude) => {
+    return data.map(item => {
+      const filteredItem = { ...item };
+      fieldsToExclude.forEach(field => delete filteredItem[field]);
+      return filteredItem;
+    });
+  };
+
+  const renderTable = (data) => {
+    if (data.length === 0) {
+      return <div>No data available</div>;
+    }
+    
+    const filteredData = data.map(item => {
+      return Object.fromEntries(Object.entries(item).filter(([key, value]) => value !== ""));
+    });
+
+    return (
+      <table className="table-auto border-collapse border border-gray-400 ">
+        <thead>
+          <tr>
+            {Object.keys(filteredData[0]).map((key) => (
+              <th className="border border-gray-300 px-4 py-2" key={key}>{key.replace(/_/g, " ")}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {filteredData.map((item, index) => (
+            <tr key={index}>
+              {Object.values(item).map((value, i) => (
+                <td className="border border-gray-300 px-4 py-2" key={i}>
+                  {typeof value === 'object' ? JSON.stringify(value) : value}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  };
 
   return (
-    <div className="bg-gradient-to-r from-neutral-300 to-stone-400 w-screen h-screen " style={containerStyle}>
+    <div className="bg-gradient-to-r from-neutral-300 to-stone-200 w-screen h-screen " style={containerStyle}>
       <div className="mb-6 bg-gradient-to-b from-red-50 to-neutral-400"><Navbaar /></div>
 
       <div className="glass mb-6">
@@ -180,34 +211,26 @@ const HomePage = () => {
       {loading && <div>Loading...</div>} {/* Show loading indicator when fetching */}
 
       {activeSection === "userDetails" && userDetails && (
-        <div>
+        <div className="bg-gray-400 mt-5 p-6 rounded-2xl">
           <h2>User Details:</h2>
-          {renderDetails(userDetails)}
+          {renderTable(filterFields([userDetails], ['freezed']))}
         </div>
       )}
       {activeSection === "portfolio" && portfolioData.length > 0 && (
-        <div>
+        <div className="bg-gray-400 mt-5 p-6 rounded-2xl">
           <h2>Portfolio Data:</h2>
-          {portfolioData.map((item, index) => (
-            <div key={index} style={{ marginBottom: "10px" }}>
-              {renderDetails(item)}
-            </div>
-          ))}
+          {renderTable(filterFields(portfolioData, ['amount_in_inr']))}
         </div>
       )}
       {activeSection === "wallets" && wallets.length > 0 && (
-        <div>
+        <div className="bg-gray-400 mt-5 p-6 rounded-2xl">
           <h2>Wallets:</h2>
-          {wallets.map((wallet, index) => (
-            <div key={index} style={{ marginBottom: "10px" }}>
-              {renderDetails(wallet)}
-            </div>
-          ))}
+          {renderTable(filterFields(wallets, ['success']))}
         </div>
       )}
 
       {activeSection === "checkOrder" && (
-        <div>
+        <div className="bg-gray-400 mt-5 p-6 rounded-2xl">
           <h2 className="flex justify-center items-center py-3">Check Order</h2>
           <form style={formStyle} onSubmit={handleOrderCheck}>
             <select
@@ -232,13 +255,9 @@ const HomePage = () => {
       )}
 
       {activeSection === "orderResponse" && orderStatus.length > 0 && (
-        <div>
+        <div className="bg-gray-400 mt-5 p-4 mx-6 rounded-2xl text-sm">
           <h2>Order Status:</h2>
-          {orderStatus.map((status, index) => (
-            <div key={index} style={{ marginBottom: "10px" }}>
-              {renderDetails(status)}
-            </div>
-          ))}
+          {renderTable(orderStatus)}
         </div>
       )}
 

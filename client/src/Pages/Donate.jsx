@@ -78,7 +78,7 @@ const Donate = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-neutral-300 to-stone-400 w-screen h-screen " style={containerStyle}>
+    <div className="bg-gradient-to-r from-neutral-300 to-stone-300 w-screen h-screen " style={containerStyle}>
       <Navbaar />
       <div className="glass px-20 py-8 mt-8">
         <h1 className="mb-5 flex justify-center items-center text-2xl">Donate for good</h1>
