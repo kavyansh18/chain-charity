@@ -9,6 +9,7 @@ It's very important for NRIs to send funds to Indian NGOs which is very hard due
 - **Visit Website:** [Chain Charity](https://chain-charity.vercel.app/)
 - **Code Walkthrough Video:** [YouTube Walkthrough](https://www.youtube.com/watch?v=yxS6PbB1sEQ)
 - **Project Demo Video:** [YouTube Demo](https://youtu.be/kPQ5hwvJI2s)
+- - **Medium Blog on Buisness Model & Future Plans:** [Medium](https://medium.com/@hackpracmake/chain-charity-where-humanity-meets-d86f1bd0bc57)
 
 ## Features
 
